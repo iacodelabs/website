@@ -25,7 +25,7 @@ import {
 } from "lucide-react"
 import { KanbanBoard } from "@/components/kanban-board"
 import { ProjectsManager } from "@/components/projects-manager"
-import { DragTest } from "@/components/drag-test"
+
 import {
   SidebarProvider,
   Sidebar,
@@ -545,10 +545,7 @@ export default function AdminDashboard() {
             {/* Tasks Tab */}
             <TabsContent value="tasks" className="space-y-6">
               <div className="space-y-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Teste de Drag and Drop</h2>
-                  <DragTest />
-                </div>
+                {/* Teste de Drag and Drop removido */}
                 <div>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Quadro de Tarefas</h2>
                   <KanbanBoard />

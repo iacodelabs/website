@@ -20,6 +20,7 @@ import {
   DragStartEvent,
   DragOverEvent,
   rectIntersection,
+  useDroppable,
 } from "@dnd-kit/core"
 import {
   arrayMove,
@@ -207,9 +208,7 @@ function DroppableColumn({
   setEditingTask: (task: Task | null) => void
   handleSaveEdit: () => void
 }) {
-  const {
-    setNodeRef,
-  } = useSortable({ id: `column-${status}` })
+  const { setNodeRef, isOver } = useDroppable({ id: `column-${status}` })
 
   const getStatusTitle = (status: Task["status"]) => {
     switch (status) {
@@ -225,13 +224,15 @@ function DroppableColumn({
   }
 
   return (
-    <Card ref={setNodeRef} className="bg-gray-900 text-gray-50 h-fit min-h-[400px] border-2 border-dashed border-gray-700 hover:border-purple-500 transition-colors">
+    <Card
+      className={`bg-gray-900 text-gray-50 h-fit min-h-[400px] border-2 border-dashed transition-colors ${isOver ? "border-purple-500 bg-purple-950/30" : "border-gray-700 hover:border-purple-500"}`}
+    >
       <CardHeader>
         <CardTitle className="capitalize text-purple-400">
           {getStatusTitle(status)}
         </CardTitle>
       </CardHeader>
-      <CardContent className="min-h-[300px] p-4">
+      <CardContent ref={setNodeRef} className="min-h-[300px] p-4 flex flex-col gap-2">
         <SortableContext
           items={tasks.map(task => task.id)}
           strategy={verticalListSortingStrategy}
